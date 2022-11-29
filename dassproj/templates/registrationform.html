@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>DassApp - Login</title>
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-image: url('{% static "img/Background.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            }
+    </style>
+</head>
+<body class="text-center">
+        <main class="form-signin w-100 m-auto">
+            <form action="{% url 'submitregistrationform' %}" method="post">
+                <img class="mb-4" src="{% static 'img/school_logo_transparent.png' %}" alt="" width="72" height="67">
+                <h1 class="h3 mb-3 fw-normal text-uppercase">Dass app</h1>
+                <span class="text-center">Registration</span>
+                {% include 'messages.html' %}
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-floating">
+                    {{ form.student_id.errors }}
+                    {{ form.student_id }}
+                    <label for="floatingInput">Student ID</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.last_name.errors }}
+                    {{ form.last_name }}
+                    <label for="floatingInput">Lastname</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.first_name.errors }}
+                    {{ form.first_name }}
+                    <label for="floatingInput">Firstname</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.middle_name.errors }}
+                    {{ form.middle_name }}
+                    <label for="floatingInput">Middlename</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.address.errors }}
+                    {{ form.address }}
+                    <label for="floatingInput">Address</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.phone_number.errors }}
+                    {{ form.phone_number }}
+                    <label for="floatingInput">Phone Number</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.gender.errors }}
+                    {{ form.gender }}
+                    <label for="floatingInput">Gender</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.date_of_birth.errors }}
+                    {{ form.date_of_birth }}
+                    <label for="floatingInput">Date of Birth</label>
+                </div><hr>
+                <div class="form-floating">
+                    {{ form.password.errors }}
+                    {{ form.password }}
+                    <label for="floatingInput">Password</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.repassword.errors }}
+                    {{ form.repassword }}
+                    <label for="floatingInput">Confirm Password</label>
+                </div>
+                <hr>
+              <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+            </form>
+            <p class="mt-5 mb-3 text-muted">&copy; 2022 - Silay Institute Inc.</p>
+            <a href="{% url 'login_view' %}">Home</a>
+          </main>
+    
+</body> 
+</html>

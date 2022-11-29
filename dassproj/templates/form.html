@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}  
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h4>Depression, Anxiety and Stress Scale - Form</h4>
+        </div>
+        <p><strong>Kindly fill-out this form.</strong></p>
+        {% include 'messages.html' %}
+        <form action="{% url 'submitform' %}" method="post" class="form">
+          {% csrf_token %}
+          <input type="hidden" name="name" value="{{ UserID.id }}"/>
+          {% for x in myQuestions %}
+          <label>{{x.question_text}}</label><br>
+              <input type="hidden" name="question[]" value="{{ x.id }}"/>
+              Choices :
+              <select id="{{ x.id }}" name="{{ x.id }}" style="width:350px;padding:5px;text-align: center;">
+                  {% for y in myChoices %}
+                  <option value="{{ y.id }}">{{ y.choice_text }}</option>
+                  {% endfor %}
+              </select><br>
+          {% endfor %}
+          <hr>
+          <button type="submit" class="btn" style="border: 1px solid forestgreen;background-color: transparent;">Submit</button>
+      </form>
+      </main>
+    </div>
+  </div>
+  
+{% endblock content %}

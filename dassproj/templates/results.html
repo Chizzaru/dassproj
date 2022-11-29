@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}  
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h4>Result</h4>
+        </div>
+            <h4>Score : {{ results.score }}</h4>
+            <h4>Depression : {{ results.depression }}</h4>
+            <h4>Anxiety : {{ results.anxiety }}</h4>
+            <h4>Stress : {{ results.stress }}</h4>
+          <hr>
+          <a href="{% url 'dashboard_view' %}" class="btn" style="border: 1px solid forestgreen;background-color: transparent;">Home</a>
+      </main>
+    </div>
+  </div>
+  
+{% endblock content %}
