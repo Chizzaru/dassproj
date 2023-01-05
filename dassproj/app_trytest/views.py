@@ -6,6 +6,9 @@ from django.urls import reverse
 from .operations import getResultAnxiety, getResultDepression, getResultStress, DASS21_compute
 import datetime
 
+
+from .randomforest import randomForestAnxiety, randomForestDepression, randomForestStress
+
 from django.contrib.messages import constants as messages
 
 
@@ -78,18 +81,18 @@ def submitform(request):
         context = {
             'results' : {
                 'score' : '{:.2f}'.format(total),
-                'depression' : str(res_depress) + ' - ' + str(getResultDepression(res_depress)),
-                'anxiety' : str(res_anxiety) + ' - ' + str(getResultAnxiety(res_anxiety)),
-                'stress' : str(res_stress) + ' - ' + str(getResultStress(res_stress))
+                'depression' : randomForestDepression(DASS21_depression),
+                'anxiety' : randomForestAnxiety(DASS21_anxiety),
+                'stress' : randomForestStress(DASS21_stress)
             }
         }
 
         save_score = Result(
                 name_id=stname,
                 score = total, 
-                depression= str(res_depress) + ' - ' + str(getResultDepression(res_depress)),
-                anxiety= str(res_anxiety) + ' - ' + str(getResultAnxiety(res_anxiety)),
-                stress= str(res_stress) + ' - ' + str(getResultStress(res_stress)),
+                depression= randomForestDepression(DASS21_depression),
+                anxiety= randomForestAnxiety(DASS21_anxiety),
+                stress= randomForestStress(DASS21_stress),
                 date= tdate
                 )
         save_score.save()
