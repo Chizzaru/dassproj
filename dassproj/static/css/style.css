@@ -35,3 +35,74 @@ body {
 .errorlist > li {
   margin-left: 0px;
 }
+
+.wrapper {
+  height: 300px;
+  width: 300px;
+  position: relative;
+  border : 2px solid #eee;
+  border-radius: 50%;
+  background: url("https://th.bing.com/th/id/OIP.ySiQ61-170um7jHn2cv15QAAAA?pid=ImgDet&rs=1");
+  background-size: 100% 100%;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+.my_file {
+  position: absolute;
+  bottom: 0;
+  outline: none;
+  color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 120px;
+  cursor: pointer;
+  transition: 0.5s;
+  background: rgba(0,0,0, 0.5);
+  opacity: 0;
+}
+
+.my_file::-webkit-file-upload-button{
+  visibility: hidden;
+}
+
+.my_file::before{
+  content:'\f030';
+  font-family: fontAwesome;
+  font-size: 50px;
+  color: white;
+  display: inline-block;
+  -webkit-user-select: none;
+  user-select: none;
+
+}
+
+.my_file::after{
+  content: 'Update';
+  /*font-family: 'arial';*/
+  font-weight: bold;
+  color: white;
+  display: block;
+  top:70px;
+  font-size: 14px;
+  position: absolute;
+}
+
+.my_file:hover {
+  opacity: 1;
+}
+
+
+.card-stress {
+  background: whitesmoke;
+}
+
+.card-stress::before{
+  content: '\f5c8';
+  font-family: fontAwesome;
+  color: rgba(240, 240, 60, 0.6);
+  font-size: 100px;
+  display: block;
+  top: 0px;
+  position: absolute;
+}

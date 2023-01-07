@@ -7,12 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
     <title>DassApp</title>
     <style>
       body {
         padding : 0;
         margin : 0;
-        box-sizing: border-box;
+        background: white;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: darkslategrey;
+        color : white;
+        text-align: right;
+        padding-right: 50px;
+        text-transform: uppercase;
+        font-weight: bold;
       }
     </style>
 </head>
@@ -63,44 +76,55 @@
                   </a>
                 </li>
               </ul>
+
+            </div>
+            <div class="fixed-bottom footer">
+              DASS Automation - BETA
             </div>
           </nav>
 
     {% block content %}
     {% endblock content %}
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/dashboard.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"></script>
-
-    <script>
-
-      const URL = {
-        CLEARLOGS : 'clear-logs'
-      }
-
-      const myModal = new bootstrap.Modal(document.getElementById('myModal'), {
-        keyboard: false
-      })
-
-      const modalToggle = document.querySelectorAll('.delete');
-      modalToggle.forEach(mt => mt.addEventListener('click', ()=> {
-        const btnAttribID = mt.getAttribute('id')
-        const arr = btnAttribID.split('/')
-        const id = arr[0]
-        const date = arr[1]
-
-        document.getElementById('logsdate').innerHTML = date
-        document.getElementById('logsid').value = id
-        
-        myModal.show()
-
-      }))
+    
 
 
+
+
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/dashboard.js' %}"></script>
+  <script src="{% static 'js/fontawesome.min.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"></script>
+
+  <script>
+
+    const URL = {
+      CLEARLOGS : 'clear-logs'
+    }
+
+    const myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+      keyboard: false
+    })
+
+    const modalToggle = document.querySelectorAll('.delete');
+    modalToggle.forEach(mt => mt.addEventListener('click', ()=> {
+      const btnAttribID = mt.getAttribute('id')
+      const arr = btnAttribID.split('/')
+      const id = arr[0]
+      const date = arr[1]
+
+      document.getElementById('logsdate').innerHTML = date
+      document.getElementById('logsid').value = id
       
-      
+      myModal.show()
+
+    }))
 
 
-    </script>
+    
+    
+
+
+  </script>  
+
 </body>
 </html>
