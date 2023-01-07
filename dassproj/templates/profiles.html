@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}  
+{% load static %}
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h4>Profiles</h4>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div style="border: 1px solid black;border-radius: 30px;">
+                    <img src="https://th.bing.com/th/id/OIP.ySiQ61-170um7jHn2cv15QAAAA?pid=ImgDet&rs=1" alt="" style="width: 100%;border-radius: 30px;">
+                </div>
+                <div>
+                    <div class="text-center" style="font-weight: bold;font-size: 25px;">
+                        {{ UserID.name }}
+                    </div>
+                    <div class="text-center" style="font-weight: bold;font-size: 12px;">
+                        {{ UserID.address }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div style="float: right">
+                    <a href="{% url 'clearAllLogs' action='clear' %}" class="btn btn-primary btn-sm">Clear Logs</a>
+                </div>
+                <br>
+                <h5>Test History Logs : </h5>
+                <div style="overflow-y: scroll; height:370px;">
+                    <ol class="list-group list-group-flush">
+                        {% for x in HistoryLogs %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                              <div class="fw-bold">{{ x.date }}</div>
+                              Depression : {{ x.depression }},
+                              Anxiety : {{ x.anxiety }},
+                              Stress : {{ x.stress }}
+                            </div>
+                            <span id="{{x.id}}/{{x.date}}" type="button" class="delete badge bg-danger rounded-pill">x</span>
+                          </li>
+                        {% endfor %}
+                      </ol>
+                </div>
+            </div>
+        </div>
+  
+        <br><br><br>
+        <hr>
+        <!--
+        <h4>Depression Anxiety Stress Scale</h4><hr>
+        <table class="table table-bordered">
+            <tr>
+                <th></th>
+                <th>Depression</th>
+                <th>Anxiety</th>
+                <th>Stress</th>
+            </tr>
+            <tr>
+                <td>Normal</td>
+                <td>0-4</td>
+                <td>0-3</td>
+                <td>0-7</td>
+            </tr>
+            <tr>
+                <td>Mild</td>
+                <td>5-6</td>
+                <td>4-5</td>
+                <td>8-9</td>
+            </tr>
+            <tr>
+                <td>Moderate</td>
+                <td>7-10</td>
+                <td>6-7</td>
+                <td>10-12</td>
+            </tr>
+            <tr>
+                <td>Severe</td>
+                <td>11-13</td>
+                <td>8-9</td>
+                <td>13-16</td>
+            </tr>
+            <tr>
+                <td>Extremely Severe</td>
+                <td>14+</td>
+                <td>10+</td>
+                <td>17+</td>
+            </tr>
+        </table>-->
+
+      </main>
+    </div>
+  </div>
+  {% include 'modal.html' %}
+{% endblock content %}

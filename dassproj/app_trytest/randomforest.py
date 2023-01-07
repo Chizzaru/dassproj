@@ -3,12 +3,15 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
+import os
 
+# Get the current working directory
+cwd = os.getcwd()
 
 
 def randomForestAnxiety(arr):
     # Load the CSV file
-    df = pd.read_csv('Final DataSet of DASS21 - Anxiety.csv')
+    df = pd.read_csv('FinalDataSetofDASS21-Anxiety.csv')
 
     # Extract the features and labels from the DataFrame
     X = df.drop('SaverityLevel', axis=1)
@@ -39,7 +42,8 @@ def randomForestAnxiety(arr):
 
 def randomForestDepression(arr):
     # Load the CSV file
-    df = pd.read_csv('Final DataSet of DASS21 - Depression.csv')
+    df = pd.read_csv("FinalDataSetofDASS21-Depression.csv")
+    
 
     # Extract the features and labels from the DataFrame
     X = df.drop('SaverityLevel', axis=1)
@@ -71,7 +75,8 @@ def randomForestDepression(arr):
 
 def randomForestStress(arr):
     # Load the CSV file
-    df = pd.read_csv('Final DataSet of DASS21 - Stress.csv')
+    df = pd.read_csv('FinalDataSetofDASS21-Stress.csv')
+
 
     # Extract the features and labels from the DataFrame
     X = df.drop('SaverityLevel', axis=1)
@@ -103,4 +108,4 @@ def randomForestStress(arr):
 
 
 #data = [0,0,0,0,0,0,0]
-#print(randomForestAnxiety(data))
+#print(randomForestDepression(data))

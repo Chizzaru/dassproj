@@ -1,3 +1,5 @@
+pip install -r requirements.txt
+
 Question item Stress
 'q1','q6','q8','q11','q12','q14','q18'
 
@@ -6,3 +8,5 @@ Question item Depression
 
 Question item Anxiety
 'q2','q4','q7','q9','q15','q19','q20'
+
+

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Question, Choice, Answer, Result
 from django.urls import reverse
 from .operations import getResultAnxiety, getResultDepression, getResultStress, DASS21_compute
@@ -10,6 +10,9 @@ import datetime
 from .randomforest import randomForestAnxiety, randomForestDepression, randomForestStress
 
 from django.contrib.messages import constants as messages
+
+
+
 
 
 
@@ -33,6 +36,21 @@ def get_form(request):
 
     return HttpResponse(template.render(context, request))
 
+def deletelogs(request):
+    if request.method == 'POST':
+        logsid = request.POST['logsid']
+
+        row = Result.objects.get(id=logsid)
+        row.delete()
+    return HttpResponseRedirect(reverse('profiles_view'))
+
+def clearAllLogs(request, action):
+    current_user = request.user
+    id = current_user.id
+    if action == 'clear':
+        row = Result.objects.filter(name_id = id)
+        row.delete()
+    return HttpResponseRedirect(reverse('profiles_view'))
 
 
 def submitform(request):
@@ -48,10 +66,14 @@ def submitform(request):
         DASS21_anxiety = []
         DASS21_stress = []
 
+
         for x in request.POST.getlist('question[]'):
             objx = Question.objects.get(id=x)
-            choice = request.POST[x]
-            objy = Choice.objects.get(id=choice)
+            #choice = request.POST[x]
+            #choice = request.POST[x]
+            choice = request.POST['ans' + x]
+            #print(choice)
+            objy = Choice.objects.get(id = choice)
             #item_choose = Choice.objects.get(id=choice)
             subscaleclass_id = objx.subscaleclass_id
 

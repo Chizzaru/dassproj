@@ -6,13 +6,13 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h4>Dashboard</h4>
         </div>
-        <p>Dated : <strong>{{ latestresult.date }}</strong></p>
+        <p>Recent test result : <strong>{{ latestresult.date }}</strong></p>
         <div class="row">
           <div class="col-md-4">
             <div class="card">
               <h1 class="text-center" style="margin-top:10px;">{{ latestresult.depression }}</h1>
               <div class="card-body">
-                <p class="card-text text-center">Depression Score</p>
+                <p class="card-text text-center">Depression Status</p>
               </div>
             </div>
           </div>
@@ -20,7 +20,7 @@
             <div class="card">
               <h1 class="text-center" style="margin-top:10px;">{{ latestresult.anxiety }}</h1>
               <div class="card-body">
-                <p class="card-text text-center">Anxiety Score</p>
+                <p class="card-text text-center">Anxiety Status</p>
               </div>
             </div>
           </div>
@@ -28,14 +28,15 @@
             <div class="card">
               <h1 class="text-center" style="margin-top:10px;">{{ latestresult.stress }}</h1>
               <div class="card-body">
-                <p class="card-text text-center">Stress Score</p>
+                <p class="card-text text-center">Stress Status</p>
               </div>
             </div>
           </div>
         </div>
   
         <br><br><br>
-        <hr>
+        
+        <!--
         <h4>Depression Anxiety Stress Scale</h4><hr>
         <table class="table table-bordered">
             <tr>
@@ -74,7 +75,7 @@
                 <td>10+</td>
                 <td>17+</td>
             </tr>
-        </table>
+        </table>-->
 
       </main>
     </div>

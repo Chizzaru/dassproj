@@ -8,6 +8,9 @@ from app_login.models import User
 from app_login.mymngr import MyMgr
 from app_trytest.models import Result
 
+from django.template import loader
+from django.http import HttpResponse
+
 from django.contrib.auth.hashers import make_password
 
 
@@ -16,6 +19,28 @@ from django.contrib import messages
 def index_view(request):
     form = LoginForm()
     return render(request, 'login.html', {'form': form })
+
+def profiles_view(request):
+    current_user = request.user
+    userid = current_user.id
+
+    template = loader.get_template('profiles.html')
+
+    HistoryLogs = Result.objects.filter(name_id=userid).order_by('-date')
+    context = {}
+    if HistoryLogs:
+        context = {
+            'HistoryLogs'   : HistoryLogs,
+            'UserID'        : {
+                'id' : current_user.id,
+                'student_id' : current_user.student_id,
+                'address' : current_user.address,
+                'name' : current_user.first_name + ' ' + current_user.middle_name + ' ' + current_user.last_name
+            }
+        }
+
+    return HttpResponse(template.render(context, request))
+
 
 def dashboard_view(request):
     current_user = request.user
