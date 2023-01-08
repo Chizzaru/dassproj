@@ -42,8 +42,8 @@ body {
   position: relative;
   border : 2px solid #eee;
   border-radius: 50%;
-  background: url("https://th.bing.com/th/id/OIP.ySiQ61-170um7jHn2cv15QAAAA?pid=ImgDet&rs=1");
-  background-size: 100% 100%;
+  /*background: url("https://th.bing.com/th/id/OIP.ySiQ61-170um7jHn2cv15QAAAA?pid=ImgDet&rs=1");*/
+  /*background-size: 100% 100%;*/
   margin: 10px auto;
   overflow: hidden;
 }

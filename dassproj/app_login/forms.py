@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 #from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-from app_login.models import User
+from app_login.models import User, Profile
 from app_login.mymngr import MyMgr
 
 class LoginForm(forms.Form):
@@ -36,6 +36,9 @@ GENDER = (
     ('Female','Female')
 )
 
+class UploadImageForm(forms.Form):
+    model = Profile
+    fields = ('id','image')
 
 class RegistrationForm(forms.Form):
     student_id = forms.CharField(

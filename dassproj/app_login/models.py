@@ -28,5 +28,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.student_id + '-' + self.first_name + ' ' + self.middle_name + ' ' + self.last_name
 
+
+
+class Profile(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='dassproj/files/profiles')
+
+
+
     
 

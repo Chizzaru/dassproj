@@ -8,13 +8,15 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="wrapper">
-                    <input type="file" class="my_file">
-        
+                <div class="wrapper" style="background: url('/dassproj/{{ UserID.profile.image }}');background-size: 100% 100%;">
+                    <form id="updateform" action="{% url 'upload_image' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="profile_id" value="{{ UserID.profile.id }}">
+                        <input id="file" name="image" type="file" class="my_file" accept="image/*">
+                    </form>
                 </div>
                 <div>
                     <div class="text-center" style="font-weight: bold;font-size: 25px;">
-                        
                         {{ UserID.name }}
                     </div>
                     <div class="text-center" style="font-weight: bold;font-size: 12px;">

@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
-from app_login.forms import LoginForm, RegistrationForm
+from app_login.forms import LoginForm, RegistrationForm, UploadImageForm
 from django.contrib.auth import login,logout
 from django.urls import reverse
 
-from app_login.models import User
+from app_login.models import User, Profile
 from app_login.mymngr import MyMgr
 from app_trytest.models import Result
 
@@ -14,7 +14,15 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 
 
+from django.shortcuts import render
+from django.template import loader
+
 from django.contrib import messages
+
+from django.core.files.storage import FileSystemStorage
+
+import os
+import uuid
 
 def index_view(request):
     form = LoginForm()
@@ -27,6 +35,8 @@ def profiles_view(request):
     template = loader.get_template('profiles.html')
 
     HistoryLogs = Result.objects.filter(name_id=userid).order_by('-date')
+    profile = Profile.objects.filter(user_id=userid).order_by('-id').first()
+
     context = {}
     if HistoryLogs:
         context = {
@@ -35,7 +45,18 @@ def profiles_view(request):
                 'id' : current_user.id,
                 'student_id' : current_user.student_id,
                 'address' : current_user.address,
-                'name' : current_user.first_name + ' ' + current_user.middle_name + ' ' + current_user.last_name
+                'name' : current_user.first_name + ' ' + current_user.middle_name + ' ' + current_user.last_name,
+                'profile' : profile
+            }
+        }
+    else :
+        context = {
+            'UserID'        : {
+                'id' : current_user.id,
+                'student_id' : current_user.student_id,
+                'address' : current_user.address,
+                'name' : current_user.first_name + ' ' + current_user.middle_name + ' ' + current_user.last_name,
+                'profile' : profile
             }
         }
 
@@ -47,6 +68,8 @@ def dashboard_view(request):
     userid = current_user.id
 
     obj= Result.objects.filter(name_id=userid).order_by('-id').first()
+
+
     context = {}
     if obj:
         context = {
@@ -115,5 +138,38 @@ def submitregistrationform(request):
     else:
         form = RegistrationForm()
     return render(request, 'registrationform.html', {'form': form})
+
+
+
+def upload_image(request):
+    template = 'profiles.html'
+
+    if request.method == 'POST':
+        form = UploadImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = Profile.objects.get(id=request.POST['profile_id'])
+
+
+            try:
+                profile = Profile.objects.get(pk=request.POST['profile_id']).image
+
+            except Profile.DoesNotExist:
+                return False
+
+            new_file = request.FILES['image']
+            if not profile == new_file:
+                if os.path.isfile(profile.path):
+                    os.remove(profile.path)
+
+            image.id = request.POST['profile_id']
+            image.image = request.FILES['image']
+            image.save()
+           # return redirect('success')
     
+
+    return HttpResponseRedirect(reverse('profiles_view'))
+
+    
+
+
 
