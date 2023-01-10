@@ -15,8 +15,8 @@ urlpatterns = [
     path('uploadimage/',views.upload_image,name="upload_image"),
     path('dassform/',formviews.get_form,name="get_form"),
     path('dassform/submitform/',formviews.submitform,name="submitform"),
-    path('deletelogs/',formviews.submitform,name="deletelogs"),
-    path('clearAllLogs/<action>',formviews.submitform,name="clearAllLogs"),
+    path('deletelogs/',formviews.deletelogs,name="deletelogs"),
+    path('clearAllLogs/<action>',formviews.clearAllLogs,name="clearAllLogs"),
     path('registrationform/',views.registration_view,name="registration_view"),
 
 ]
