@@ -43,6 +43,15 @@ def deletelogs(request):
         row = Result.objects.get(id=logsid)
         row.delete()
     return HttpResponseRedirect(reverse('profiles_view'))
+    
+
+def deletelog(request, result_id):
+    result = Result.objects.get(id = result_id)
+    result.delete()
+
+    return render(request,'resultpage.html',{'message':'Successfully deleted'})
+
+
 
 def clearAllLogs(request, action):
     current_user = request.user
@@ -124,5 +133,7 @@ def submitform(request):
         return HttpResponse(template.render(context, request))
         #return render(request.GET, 'form.html')
         #return HttpResponse("Saved")
+
+
 
     

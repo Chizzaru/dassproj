@@ -93,16 +93,3 @@ body {
 }
 
 
-.card-stress {
-  background: whitesmoke;
-}
-
-.card-stress::before{
-  content: '\f5c8';
-  font-family: fontAwesome;
-  color: rgba(240, 240, 60, 0.6);
-  font-size: 100px;
-  display: block;
-  top: 0px;
-  position: absolute;
-}

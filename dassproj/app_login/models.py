@@ -26,7 +26,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS= ['last_name', 'first_name','address','gender','date_of_birth']
 
     def __str__(self):
-        return self.student_id + '-' + self.first_name + ' ' + self.middle_name + ' ' + self.last_name
+        return self.first_name + ' ' + self.middle_name + ' ' + self.last_name
 
 
 

@@ -37,7 +37,7 @@ class Answer(models.Model):
     
 
 class Result(models.Model):
-    name = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.ForeignKey(User, on_delete=models.CASCADE, related_name='result')
     score = models.IntegerField(default=0)
     depression = models.CharField(max_length=200)
     anxiety = models.CharField(max_length=200)

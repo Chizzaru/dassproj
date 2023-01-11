@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}  
+{% load static %}
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h4>Results</h4>
+        </div>
+        {% if message %}
+        <div class="alert alert-success" role="alert">
+          {{ message }}. <a class="btn btn-success btn-sm" href="{% url 'resultpage_view' %}">Reload.</a>
+        </div>
+        
+        {% else %}
+        <!--<div>
+            Search Name : <input type="text" placeholder="Name here..." style="padding: 5px 10px;text-decoration: none;">
+            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div><br>-->
+        <table class="table table-condensed">
+            <thead>
+                <tr class="table-primary">
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Depression</th>
+                    <th>Anxiety</th>
+                    <th>Stress</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in datas %}
+                <tr>
+                    <!--<td>{{ data.0 }}</td>-->
+                    <td>{{ data.1 }}</td>
+                    <td>{{ data.2 }}</td>
+                    <td>{{ data.3 }}</td>
+                    <td>{{ data.4 }}</td>
+                    <td>{{ data.5 }}</td>
+                    <td>{{ data.6 }}</td>
+                    <td>
+                        <a href="{% url 'deletelog' data.0 %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-delete-left"></i> Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+      </main>
+    </div>
+  </div>
+{% endblock content %}

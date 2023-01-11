@@ -24,6 +24,8 @@ from django.core.files.storage import FileSystemStorage
 import os
 import uuid
 
+from django.db import connection
+
 def index_view(request):
     form = LoginForm()
     return render(request, 'login.html', {'form': form })
@@ -83,11 +85,43 @@ def dashboard_view(request):
             }
     }
 
-    print(context)
+    #print(context)
     return render(request, "dashboard.html",context)
 
 def form_view(request):
     return render(request, "form.html")
+
+
+def resultpage_view(request):
+    template = 'resultpage.html'
+    context = {}
+
+    cursor = connection.cursor()
+    cursor.execute("""
+            SELECT
+            a.id as id,
+            concat(b.first_name,' ',b.middle_name,' ',b.last_name) as name,
+            a.score,
+            a.depression,
+            a.anxiety,
+            a.stress,
+            a.date
+            FROM app_trytest_result as a
+            INNER JOIN app_login_user as b
+            ON a.name_id = b.id
+            """)
+
+    rows = cursor.fetchall()
+    cursor.close()
+
+    context = {
+        'datas' : rows
+    }
+
+
+    return render(request, template, context)
+
+
 
 def registration_view(request):
     form = RegistrationForm()
